@@ -15,12 +15,12 @@ pip3 install -r requirements.txt
 python3 extractor.py
 ```
 ## Decryption of the database
-`decryptor.py`  assumes that the files `msgstore.db.crypt12` and `key` are on the same directory as `decryptor.py` and will output `msgstore.db`.
+`decrypter.py`  assumes that the files `msgstore.db.crypt12` and `key` are on the same directory as `decrypter.py` and will output `msgstore.db`.
 
 ```bash
-python3 decryptor.py
+python3 decrypter.py
 ```
 To specify other paths pass them as parameters.
 ```bash
-python3 decryptor.py --key my_key --input crypted_database.db.crypt12 --output decrypted_database.db
+python3 decrypter.py --key my_key --input crypted_database.db.crypt12 --output decrypted_database.db
 ```
