@@ -9,13 +9,13 @@ def abort(message: str):
     exit(1)
 
 
-def decrypt(ket_filename: str, input_filename: str, output_filename: str):
-    print(f"[+] Reading {ket_filename}...")
-    with open(ket_filename, "rb") as key_file:
+def decrypt(key_filename: str, input_filename: str, output_filename: str):
+    print(f"[+] Reading {key_filename}...")
+    with open(key_filename, "rb") as key_file:
         key_file.seek(30)
         t1 = key_file.read(32)
         key_file.seek(126)
-        ket_filename = key_file.read(32)
+        key_filename = key_file.read(32)
 
     with open(input_filename, "rb") as input_database:
         input_database.seek(3)
@@ -31,7 +31,7 @@ def decrypt(ket_filename: str, input_filename: str, output_filename: str):
         data = input_database.read()[:-20]
 
         print(f"[+] Decrypting {input_filename}...")
-        decipher = AES.new(ket_filename, AES.MODE_GCM, iv)
+        decipher = AES.new(key_filename, AES.MODE_GCM, iv)
         sqlite = decompress(decipher.decrypt(data))
         if sqlite[:6].decode("ascii") != "SQLite":
             abort("Decryption failed")
